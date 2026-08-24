@@ -23,7 +23,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci || npm install
+      - run: npm ci
       - name: Contract pin
         run: npm run contract:check
       - name: Types

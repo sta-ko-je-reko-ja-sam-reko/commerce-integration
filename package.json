@@ -2,13 +2,16 @@
   "name": "commerce-integration",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "test": "node --test --experimental-strip-types src/**/*.test.ts",
+    "test": "node --test --experimental-strip-types \"src/**/*.test.ts\"",
     "typecheck": "tsc --noEmit",
     "contract:check": "node scripts/check-contract-pin.mjs"
   },
   "devDependencies": {
+    "@types/node": "^22.20.1",
     "typescript": "^5.6.0",
     "yaml": "^2.5.0"
   }
