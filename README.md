@@ -37,9 +37,24 @@ This is the layer a group-level integration platform leaves behind when a busine
 - **Staleness budgets are written down per field.** Stock at ±15 minutes is fine on a listing and unacceptable at checkout.
 - **Degradation is a requirement, not an incident.** BC unavailable means browse works, price shows on request, orders queue, checkout blocks honestly.
 
+## Layout
+
+```
+src/catalogue/   keyset paging for the delta feed, with tests
+src/shared/      Retry-After handling, bounded backoff, circuit breaker, with tests
+infra/bicep/     Service Bus topology and observability, per environment
+scripts/         contract pin check, run in CI
+docs/            design notes specific to this layer
+CONTRACT_PIN     the commerce-platform contract release this repository is built against
+```
+
+## Contract pin
+
+`CONTRACT_PIN` names the contract release this repository is built against. CI fetches that release and asserts the properties this codebase depends on — the bulk line cap it chunks baskets at, the page cap it clamps to, the required idempotency header. A contract that moves under this repository fails its build rather than a request at runtime.
+
 ## Status
 
-Early design. Contracts and infrastructure modules land before any mapping code.
+Foundations. The two pieces the architecture hinges on are implemented and tested: [keyset paging](docs/catalogue-paging.md) for the catalogue feed, and throttle-aware retry with a circuit breaker. Mapping functions and orchestration follow.
 
 ## Licence
 
